@@ -1,0 +1,5 @@
+.background-image {
+  background-image: url("/publuc/images/background-home.jpg");
+  background-size: cover;
+  background-position: center;
+}
