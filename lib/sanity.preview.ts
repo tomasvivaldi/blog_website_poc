@@ -1,5 +1,3 @@
-"use-client";
-
 import { definePreview } from "next-sanity/preview";
 import { projectId, dataset } from "./sanity.client";
 
@@ -16,4 +14,3 @@ export const usePreview = definePreview({
   dataset,
   onPublicAccessOnly,
 });
-console.log(projectId);

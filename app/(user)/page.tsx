@@ -6,8 +6,13 @@ import BlogList from "@/components/BlogList";
 
 import MainPoster from "@/components/MainPoster";
 import PostPreview from "@/components/PostPreview";
-// import PreviewSuspense from "@/components/PreviewSuspense";
+import SuspensePreview from "@/components/SuspensePreview";
 import dynamic from "next/dynamic";
+import { cache, Suspense } from "react";
+import { usePreview } from "@/lib/sanity.preview";
+
+// Enable NextJS to cache and dedupe queries
+const clientFetch = cache(client.fetch.bind(client));
 
 const query = groq`
 *[_type=="post"] {
@@ -18,14 +23,13 @@ const query = groq`
 `;
 export const revalidate = 60;
 
-const PreviewSuspense = dynamic(() => import("@/components/PreviewSuspense"), {
-  ssr: false,
-});
-
 export default async function HomePage() {
   if (previewData()) {
+    const posts = dynamic(() => usePreview(null, query), {
+      ssr: false,
+    });
     return (
-      <PreviewSuspense
+      <SuspensePreview
         fallback={
           <div role="status">
             <p className="text-center text-lg animate-pulse text-[#f7ab0a]">
@@ -34,8 +38,8 @@ export default async function HomePage() {
           </div>
         }
       >
-        <PreviewBlogList query={query} />
-      </PreviewSuspense>
+        <BlogList posts={posts} />
+      </SuspensePreview>
     );
   }
 
@@ -49,7 +53,7 @@ export default async function HomePage() {
         <MainPoster />
         <PostPreview />
 
-        <BlogList posts={[]} />
+        <BlogList posts={posts} />
       </div>
     </>
   );
