@@ -24,24 +24,26 @@ const query = groq`
 export const revalidate = 60;
 
 export default async function HomePage() {
-  if (previewData()) {
-    const posts = dynamic(() => usePreview(null, query), {
-      ssr: false,
-    });
-    return (
-      <SuspensePreview
-        fallback={
-          <div role="status">
-            <p className="text-center text-lg animate-pulse text-[#f7ab0a]">
-              Loading Preview Data
-            </p>
-          </div>
-        }
-      >
-        <BlogList posts={posts} />
-      </SuspensePreview>
-    );
-  }
+  // if (previewData()) {
+  //   // const posts = dynamic(() => usePreview(null, query), {
+  //   //   ssr: false,
+  //   // });
+  //   // const previewPosts = usePreview(null, query);
+  //   const posts = await client.fetch(query);
+  //   return (
+  //     <SuspensePreview
+  //       fallback={
+  //         <div role="status">
+  //           <p className="text-center text-lg animate-pulse text-[#f7ab0a]">
+  //             Loading Preview Data
+  //           </p>
+  //         </div>
+  //       }
+  //     >
+  //       <BlogList posts={posts} />
+  //     </SuspensePreview>
+  //   );
+  // }
 
   const posts = await client.fetch(query);
   return (
