@@ -1,4 +1,4 @@
-import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
+// import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import urlFor from "../lib/urlFor";
 import ClientSideRoute from "./ClientSideRoute";
@@ -53,7 +53,8 @@ function BlogList({ posts }: Props) {
                 <p className="text-gray-500 line-clamp-2">{post.description}</p>
               </div>
               <p className="mt-5 font-bold flex items-center group-hover:underline">
-                Read Post <ArrowUpRightIcon className="ml-2 h-4 w-4" />
+                Read Post
+                {/* <ArrowUpRightIcon className="ml-2 h-4 w-4" /> */}
               </p>
             </div>
           </ClientSideRoute>
