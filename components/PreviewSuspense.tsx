@@ -1,3 +1,5 @@
 "use-client";
 
-export { PreviewSuspense as default } from "next-sanity/preview";
+import { PreviewSuspense } from "next-sanity/preview";
+
+export default PreviewSuspense;

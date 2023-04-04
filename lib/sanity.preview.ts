@@ -16,3 +16,4 @@ export const usePreview = definePreview({
   dataset,
   onPublicAccessOnly,
 });
+console.log(projectId);

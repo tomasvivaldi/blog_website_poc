@@ -3,9 +3,11 @@ import { groq } from "next-sanity";
 import { client } from "../../lib/sanity.client";
 import PreviewBlogList from "@/components/PreviewBlogList";
 import BlogList from "@/components/BlogList";
-import PreviewSuspense from "@/components/PreviewSuspense";
+
 import MainPoster from "@/components/MainPoster";
 import PostPreview from "@/components/PostPreview";
+// import PreviewSuspense from "@/components/PreviewSuspense";
+import dynamic from "next/dynamic";
 
 const query = groq`
 *[_type=="post"] {
@@ -15,6 +17,10 @@ const query = groq`
 } | order(_createdAt desc)
 `;
 export const revalidate = 60;
+
+const PreviewSuspense = dynamic(() => import("@/components/PreviewSuspense"), {
+  ssr: false,
+});
 
 export default async function HomePage() {
   if (previewData()) {
