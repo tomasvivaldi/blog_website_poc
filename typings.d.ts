@@ -25,11 +25,11 @@ interface Author extends Base {
 
 interface Image {
   _type: "image";
-  asset: Reference;
+  asset: Reference | null;
 }
 
 interface Reference {
-  _ref: "string";
+  _ref: string;
   _type: "reference";
 }
 
@@ -44,7 +44,6 @@ interface Block {
   children: Span[];
   markDefs: any[];
   style: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-  split: (separator: string | RegExp) => string[];
 }
 
 interface Span {
@@ -55,8 +54,8 @@ interface Span {
 }
 
 interface Category extends Base {
-  description: string;
   title: string;
+  description: string;
 }
 
 interface MainImage {
